@@ -28,9 +28,9 @@ class NlpClient:
         return requests.post(self.base_url + 'classify/similarity', headers=COMMON_HEADERS,
                              data=json.dumps(data)).json()
 
-    def analyse_sentance(self, sentance):
+    def analyse_sentance(self, sentence):
         data = {
-            'positive': sentance.split(' '),
+            'positive': sentence.split(' '),
             'negative': [],
             'lang': 'en'
         }
@@ -38,21 +38,29 @@ class NlpClient:
         return requests.post(self.base_url + 'wv/eval', headers=COMMON_HEADERS,
                              data=json.dumps(data)).json()
 
-    def _obtain_vectors(self, sentances):
-        data = {"sentances": sentances}
+    def _obtain_vectors(self, sentences):
+        data = {"sentances": sentences}
         res = requests.post(self.base_url + '/wv/vectors', headers=COMMON_HEADERS, data=json.dumps(data)).json()
         return res['vectors']
 
-    def clusters(self, sentances, cluster_count):
-        vectors = self._obtain_vectors(sentances)
+    def clusters(self, sentences, cluster_count):
+        vectors = self._obtain_vectors(sentences)
+
+        i = 0
+        while i < len(vectors):
+            if vectors[i] is None:
+                sentences.pop(i)
+                vectors.pop(i)
+            i += 1
+
         X = np.array(vectors)
         kmeans = KMeans(n_clusters=cluster_count, random_state=0).fit(X)
-        line_count = len(sentances)
+        line_count = len(sentences)
         result = []
         i = 0
         while i < line_count:
             cluster = kmeans.labels_[i]
-            result.append({'cluster': str(cluster), 'sentance': sentances[i]})
+            result.append({'cluster': str(cluster), 'sentence': sentences[i]})
             i += 1
         return result
 
