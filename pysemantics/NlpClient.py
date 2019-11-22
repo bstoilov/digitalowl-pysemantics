@@ -28,7 +28,7 @@ class NlpClient:
         return requests.post(self.base_url + 'classify/similarity', headers=COMMON_HEADERS,
                              data=json.dumps(data)).json()
 
-    def analyse_sentance(self, sentence):
+    def analyse_sentence(self, sentence):
         data = {
             'positive': sentence.split(' '),
             'negative': [],
@@ -39,7 +39,10 @@ class NlpClient:
                              data=json.dumps(data)).json()
 
     def _obtain_vectors(self, sentences):
-        data = {"sentances": sentences}
+        data = {
+            "sentances": sentences
+        }
+
         res = requests.post(self.base_url + '/wv/vectors', headers=COMMON_HEADERS, data=json.dumps(data)).json()
         return res['vectors']
 
@@ -56,15 +59,17 @@ class NlpClient:
         X = np.array(vectors)
         kmeans = KMeans(n_clusters=cluster_count, random_state=0).fit(X)
         line_count = len(sentences)
-        result = []
+        result = {}
         i = 0
         while i < line_count:
             cluster = kmeans.labels_[i]
-            result.append({'cluster': str(cluster), 'sentence': sentences[i]})
+            if cluster not in result:
+                result[cluster] = []
+            result[cluster].append(sentences[i])
             i += 1
         return result
 
-    def belong(self, group, targets, sim_factor):
+    def belong(self, group, targets, sim_factor=0.5):
         group_vectors = self._obtain_vectors(group)
         target_vectors = self._obtain_vectors(targets)
         belonging = []

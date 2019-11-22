@@ -25,24 +25,17 @@ def example_clusters():
     client = NlpClient()
     cluster_data = client.clusters(sentences=all, cluster_count=cluster_count)
 
-    # now we need to make the result more presentable
-    pretty_res = {}
+    for cluster_id in cluster_data:
+        print('Cluster {} - {}'.format(cluster_id, cluster_data[cluster_id]))
 
-    for cd in cluster_data:
-        cluster = cd['cluster']
-        if cluster not in pretty_res:
-            pretty_res[cluster] = []
-        pretty_res[cluster].append(cd['sentence'])
 
-    # print the contents of each of the groups
-    for k in pretty_res:
-        print(pretty_res[k])
-
-    # OUTPUT by the time this was executed:
-    # ['broccoli', 'eggplant', 'celery', 'beetroot', 'flowers', 'leaves', 'chilli', 'carrots', 'brussels', 'seeds', 'peppers', 'capsicums', 'cabbages', 'cauliflower', 'celeriac', 'stems', 'beans', 'greens', 'cucumber', 'asparagus']
-    # ['car', 'tires', 'truck', 'gasoline', 'fuel', 'wheels', 'engine']
-    # ['swimming', 'chess', 'football', 'tennis', 'cricket', 'baseball']
+    # OUTPUT:
+    # Cluster 2 - ['greens', 'cucumber', 'peppers', 'capsicums', 'beetroot', 'cauliflower', 'cabbages', 'chilli', 'stems', 'seeds', 'celeriac', 'flowers', 'leaves', 'beans', 'asparagus', 'broccoli', 'celery', 'brussels', 'carrots','eggplant']
+    # Cluster 1 - ['tennis', 'baseball', 'football', 'swimming', 'chess', 'cricket']
+    # Cluster 0 - ['wheels', 'engine', 'tires', 'fuel', 'car', 'truck', 'gasoline']
 
     # we can see that we obtained the initial arrays, the word 'chokos' is missing from the vegetables group
     # this is because it is not recognized by the digitalowl.org api, it simply wasn't mentioned in its training data
     # so this word is ignored.
+
+example_clusters()
