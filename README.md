@@ -1,7 +1,7 @@
 # DigitalOwl NlpClient
-Python client, that utilized the digitalowl.org nlp API.
+Python client, that utilized the digitalowl.org NLP API.
 
-Take advantage of some of the modern nlp techniques in easy, fast and acessible way. Most of the time you won't need more than 10 lines of code to integrate this into your pipeline.
+Take advantage of some of the modern NLP techniques in easy, fast and acessible way. Most of the time you won't need more than 10 lines of code to integrate this into your pipeline.
 
 ## Install using pip
 ```pip install py3-pinterest```
@@ -85,7 +85,7 @@ define some group of animals:
 
 pick some random words, some of which are animals:
 
-`targets = ['carrot', 'animal', 'monkey', 'ship', 'canada', 'buffalo', 'crow', 'news', 'government', 'murder', 'chariot']`
+`targets = ['carrot', 'animal', 'monkey', 'ship', 'Canada', 'buffalo', 'crow', 'news', 'government', 'murder', 'chariot']`
 
 `client.belong(group=group, targets=targets)`
 
