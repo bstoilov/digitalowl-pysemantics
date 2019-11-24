@@ -46,5 +46,5 @@ def classify_text_example():
     # OUTPUT:
     # {'tags': ['vehicles', 'media'], 'originalTags': ['cars and automobiles', 'survey question']}
 
-# classify_url_example()
+classify_url_example()
 # classify_text_example()

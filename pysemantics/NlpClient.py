@@ -8,7 +8,7 @@ COMMON_HEADERS = {'content-type': 'application/json'}
 
 
 class NlpClient:
-    def __init__(self, base_url='http://46.4.143.163:11111'):
+    def __init__(self, base_url='http://46.4.143.163:11111/'):
         self.base_url = base_url
 
     def classify(self, input=''):
@@ -43,7 +43,7 @@ class NlpClient:
             "sentances": sentences
         }
 
-        res = requests.post(self.base_url + '/wv/vectors', headers=COMMON_HEADERS, data=json.dumps(data)).json()
+        res = requests.post(self.base_url + 'wv/vectors', headers=COMMON_HEADERS, data=json.dumps(data)).json()
         return res['vectors']
 
     def clusters(self, sentences, cluster_count):
