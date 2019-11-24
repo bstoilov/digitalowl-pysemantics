@@ -20,4 +20,4 @@ def similarity_example():
     # than 0.6 is quite similar
 
 
-# similarity_example()
+similarity_example()

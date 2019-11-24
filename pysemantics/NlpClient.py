@@ -8,7 +8,7 @@ COMMON_HEADERS = {'content-type': 'application/json'}
 
 
 class NlpClient:
-    def __init__(self, base_url='https://digitalowl.org/api/'):
+    def __init__(self, base_url='http://46.4.143.163:11111'):
         self.base_url = base_url
 
     def classify(self, input=''):
