@@ -1,5 +1,5 @@
 # DigitalOwl NlpClient
-Python client, that utilized the digitalowl.org NLP API.
+Python client, that utilized the [digitalowl.org](https://digitalowl.org) NLP API.
 
 Take advantage of some of the modern NLP techniques in easy, fast and acessible way. Most of the time you won't need more than 10 lines of code to integrate this into your pipeline.
 
